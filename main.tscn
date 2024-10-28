@@ -1,0 +1,232 @@
+[gd_scene load_steps=27 format=3 uid="uid://bpeqh5as5377y"]
+
+[ext_resource type="Texture2D" uid="uid://d38xa30ruie15" path="res://assets/grids/Dark/texture_12.png" id="1_1tunp"]
+[ext_resource type="Texture2D" uid="uid://hu5rfl6qr2nv" path="res://assets/grids/Red/texture_09.png" id="1_5xofr"]
+[ext_resource type="Texture2D" uid="uid://cu4ffsfiyns2w" path="res://assets/grids/Dark/ORANGE_BRICK_SPEC.png" id="2_y44fy"]
+[ext_resource type="PackedScene" uid="uid://cjq45trywnm87" path="res://hammer.tscn" id="4_xungh"]
+[ext_resource type="Texture2D" uid="uid://djg8y25y06h5n" path="res://assets/grids/Green/texture_09.png" id="5_cnpnl"]
+[ext_resource type="Texture2D" uid="uid://cm5m7nr7dugjd" path="res://assets/grids/Purple/texture_09.png" id="6_47v1h"]
+[ext_resource type="Texture2D" uid="uid://dv0lobdv2bx0t" path="res://assets/grids/cube.png" id="8_kyb6s"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l7jjl"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_kwbxx"]
+sky_material = SubResource("ProceduralSkyMaterial_l7jjl")
+
+[sub_resource type="Environment" id="Environment_unwqm"]
+background_mode = 2
+sky = SubResource("Sky_kwbxx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbns1"]
+albedo_texture = ExtResource("1_1tunp")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_rrbhg"]
+material = SubResource("StandardMaterial3D_mbns1")
+size = Vector3(15, 0.1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l15ax"]
+albedo_texture = ExtResource("2_y44fy")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_scale = Vector3(0.01, 0.01, 0.01)
+uv2_triplanar = true
+uv2_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_04e6r"]
+material = SubResource("StandardMaterial3D_l15ax")
+size = Vector3(1, 0.05, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdw3o"]
+albedo_texture = ExtResource("2_y44fy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhim1"]
+albedo_texture = ExtResource("2_y44fy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wcofc"]
+albedo_texture = ExtResource("5_cnpnl")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vlv5p"]
+
+[sub_resource type="GDScript" id="GDScript_wbnrp"]
+script/source = "extends MeshInstance3D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3kyuy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbkyc"]
+albedo_texture = ExtResource("6_47v1h")
+
+[sub_resource type="BoxMesh" id="BoxMesh_je1ch"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_waw7h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0llog"]
+albedo_texture = ExtResource("1_5xofr")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ameht"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0uy6j"]
+
+[node name="main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_unwqm")
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_rrbhg")
+
+[node name="wall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-07, 5, 0, -5, -2.18557e-07, 0, 0, 0, 5, -7.30645, 0.855, -0.270686)
+visible = false
+mesh = SubResource("BoxMesh_04e6r")
+surface_material_override/0 = SubResource("StandardMaterial3D_bdw3o")
+
+[node name="wall" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -7.5, 1, 0)
+material_override = SubResource("StandardMaterial3D_yhim1")
+size = Vector3(5, 0.1, 15)
+
+[node name="wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 7.5, 1, 0)
+material_override = SubResource("StandardMaterial3D_yhim1")
+size = Vector3(5, 0.1, 15)
+
+[node name="wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 1, -7.94)
+material_override = SubResource("StandardMaterial3D_yhim1")
+size = Vector3(5, 0.1, 15.5)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68637, 5.61845)
+
+[node name="hammer2" parent="." instance=ExtResource("4_xungh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.804, 1.3888, 2)
+
+[node name="target" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.433013, 0, -0.25, 0.214155, 0.257975, 0.370927, 0.128988, -0.428309, 0.223413, -3, 1.71144, 1.00051)
+material_override = SubResource("StandardMaterial3D_wcofc")
+mesh = SubResource("BoxMesh_vlv5p")
+script = SubResource("GDScript_wbnrp")
+
+[node name="Area3D" type="Area3D" parent="target"]
+transform = Transform3D(1, -1.49012e-08, 1.49012e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="target/Area3D"]
+transform = Transform3D(1, -5.96046e-08, -7.45058e-09, 0, 1, -2.98023e-08, 2.23517e-08, 1.19209e-07, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_3kyuy")
+
+[node name="target2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.439494, -0.214155, -0.1048, 0.214155, 0.257975, 0.370927, -0.1048, -0.370927, 0.318481, 0, 1, -0.676167)
+material_override = SubResource("StandardMaterial3D_mbkyc")
+mesh = SubResource("BoxMesh_je1ch")
+
+[node name="area_target2" type="Area3D" parent="target2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="target2/area_target2"]
+shape = SubResource("BoxShape3D_waw7h")
+
+[node name="target3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.451643, -0.110855, -0.183658, 0.214155, 0.257975, 0.370927, 0.0125205, -0.413715, 0.280505, 2, 1, 1.17361)
+material_override = SubResource("StandardMaterial3D_0llog")
+mesh = SubResource("BoxMesh_ameht")
+
+[node name="area_target3" type="Area3D" parent="target3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="target3/area_target3"]
+shape = SubResource("BoxShape3D_0uy6j")
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="player_ui" type="Control" parent="UserInterface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UserInterface/player_ui"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -228.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 76.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="UserInterface/player_ui/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -21.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="UserInterface/player_ui/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UserInterface/player_ui/Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_kyb6s")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="target/Area3D" to="hammer2" method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="target2/area_target2" to="hammer2" method="_on_area_target_2_area_entered"]
+[connection signal="area_entered" from="target3/area_target3" to="hammer2" method="_on_area_target_3_area_entered"]
